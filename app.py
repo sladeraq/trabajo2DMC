@@ -11,8 +11,6 @@ from io import StringIO
 
 st.set_page_config(
     page_title="Telco Customer Churn - EDA",
-    st.markdown("Samuel Ladera Q.") 
-    page_icon="📊",
     layout="wide"
 )
 
