@@ -96,7 +96,7 @@ if menu == "1 Home":
         - Churn
         """)
 
-    st.subheader("🛠 Tecnologías utilizadas")
+    st.subheader("Tecnologías utilizadas para este Trabajo 2")
 
     st.write("""
     Python, Pandas, NumPy, Streamlit,
@@ -112,7 +112,7 @@ elif menu == "2 Carga Dataset":
     st.title("Carga del Dataset")
 
     uploaded_file = st.file_uploader(
-        "Seleccione TelcoCustomerChurn.csv",
+        "Seleccione Archivo csv",
         type=["csv"]
     )
 
@@ -155,13 +155,13 @@ elif menu == "3 Analisis EDA":
     tabs = st.tabs([
         "1️ Info",
         "2️ Variables",
-        "3 Estadísticas",
+        "3 Estadisticas",
         "4 Nulos",
-        "5 Numéricas",
-        "6 Categóricas",
+        "5 Numericas",
+        "6 Categoricas",
         "7 Num vs Cat",
         "8 Cat vs Cat",
-        "9 Dinámico",
+        "9 Dinamico",
         "10 Hallazgos"
     ])
 
@@ -212,7 +212,7 @@ elif menu == "3 Analisis EDA":
 
     with tabs[2]:
 
-        st.header("Estadísticas Descriptivas")
+        st.header("Estadisticas Descriptivas")
 
         st.dataframe(analyzer.descriptive_stats())
 
@@ -226,7 +226,7 @@ elif menu == "3 Analisis EDA":
 
     with tabs[3]:
 
-        st.header("Análisis de Valores Faltantes")
+        st.header("Analisis de Valores Faltantes")
 
         nulls = analyzer.null_values()
 
@@ -246,7 +246,7 @@ elif menu == "3 Analisis EDA":
 
     with tabs[4]:
 
-        st.header("Distribución Variables Numéricas")
+        st.header("Distribucion Variables Numericas")
 
         num_cols = analyzer.get_numeric_columns()
 
@@ -271,7 +271,7 @@ elif menu == "3 Analisis EDA":
 
     with tabs[5]:
 
-        st.header("Variables Categóricas")
+        st.header("Variables Categoricas")
 
         cat_cols = analyzer.get_categorical_columns()
 
@@ -326,7 +326,7 @@ elif menu == "3 Analisis EDA":
 
     with tabs[7]:
 
-        st.header("Análisis Categorico vs Churn")
+        st.header("Analisis Categorico vs Churn")
 
         cat_cols = analyzer.get_categorical_columns()
 
