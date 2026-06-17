@@ -39,8 +39,11 @@ class DataAnalyzer:
         return self.df.mode().iloc[0]
 
 # =====================================================
-# Meunu HOME
+# Contenido y Meunu HOME
 # =====================================================
+
+st.image("banner.png" )
+st.sidebar.image("menu.jpg")
 
 menu = st.sidebar.radio(
     "Menú Principal",
