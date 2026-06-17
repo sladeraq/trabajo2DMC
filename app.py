@@ -10,12 +10,12 @@ from io import StringIO
 # =====================================================
 
 st.set_page_config(
-    page_title="Telco Customer Churn - EDA",
+    page_title="Trabajo 2 - Telco Customer Churn",
     layout="wide"
 )
 
 # =====================================================
-# CLASE POO
+# Aqui definimos la Clase POO, q sera usada por la applicacion
 # =====================================================
 
 class DataAnalyzer:
@@ -39,22 +39,22 @@ class DataAnalyzer:
         return self.df.mode().iloc[0]
 
 # =====================================================
-# HOME
+# Meunu HOME
 # =====================================================
 
 menu = st.sidebar.radio(
-    "📌 Menú Principal",
-    ["🏠 Home", "📂 Carga Dataset", "📈 EDA", "📋 Conclusiones"]
+    "Menú Principal",
+    ["1 Home", "2 Carga Dataset", "3 Analisis EDA", "4 Mis Conclusiones"]
 )
 
 # =====================================================
 # HOME
 # =====================================================
 
-if menu == "🏠 Home":
+if menu == "1 Home":
 
-    st.title("📊 Análisis Exploratorio de Datos - Telco Customer Churn")
-
+    st.title("Análisis Exploratorio de Datos - Telco Customer Churn")
+    st.markdown("Elaborado: Samuel Ladera Q.") 
     st.markdown("""
     ## Objetivo
 
@@ -107,9 +107,9 @@ if menu == "🏠 Home":
 # CARGA DATASET
 # =====================================================
 
-elif menu == "📂 Carga Dataset":
+elif menu == "2 Carga Dataset":
 
-    st.title("📂 Carga del Dataset")
+    st.title("Carga del Dataset")
 
     uploaded_file = st.file_uploader(
         "Seleccione TelcoCustomerChurn.csv",
@@ -140,9 +140,9 @@ elif menu == "📂 Carga Dataset":
 # EDA
 # =====================================================
 
-elif menu == "📈 EDA":
+elif menu == "3 Analisis EDA":
 
-    st.title("📈 Exploratory Data Analysis")
+    st.title("Analisis de Data")
 
     if "df" not in st.session_state:
         st.warning("Primero debe cargar el dataset.")
@@ -153,20 +153,20 @@ elif menu == "📈 EDA":
     analyzer = DataAnalyzer(df)
 
     tabs = st.tabs([
-        "1️⃣ Info",
-        "2️⃣ Variables",
-        "3️⃣ Estadísticas",
-        "4️⃣ Nulos",
-        "5️⃣ Numéricas",
-        "6️⃣ Categóricas",
-        "7️⃣ Num vs Cat",
-        "8️⃣ Cat vs Cat",
-        "9️⃣ Dinámico",
-        "🔟 Hallazgos"
+        "1️ Info",
+        "2️ Variables",
+        "3 Estadísticas",
+        "4 Nulos",
+        "5 Numéricas",
+        "6 Categóricas",
+        "7 Num vs Cat",
+        "8 Cat vs Cat",
+        "9 Dinámico",
+        "10 Hallazgos"
     ])
 
     # =====================================================
-    # ITEM 1
+    # informacion general
     # =====================================================
 
     with tabs[0]:
@@ -186,7 +186,7 @@ elif menu == "📈 EDA":
         st.dataframe(df.isnull().sum())
 
     # =====================================================
-    # ITEM 2
+    # clasificacon de variables
     # =====================================================
 
     with tabs[1]:
@@ -207,7 +207,7 @@ elif menu == "📈 EDA":
             st.write(categorical_cols)
 
     # =====================================================
-    # ITEM 3
+    # Estadisticas
     # =====================================================
 
     with tabs[2]:
@@ -221,7 +221,7 @@ elif menu == "📈 EDA":
         st.dataframe(analyzer.mode_values())
 
     # =====================================================
-    # ITEM 4
+    # Valores Faltantes
     # =====================================================
 
     with tabs[3]:
@@ -241,7 +241,7 @@ elif menu == "📈 EDA":
         st.pyplot(fig)
 
     # =====================================================
-    # ITEM 5
+    # Variables Numericas
     # =====================================================
 
     with tabs[4]:
@@ -266,7 +266,7 @@ elif menu == "📈 EDA":
         st.pyplot(fig)
 
     # =====================================================
-    # ITEM 6
+    # Variables Categoricas
     # =====================================================
 
     with tabs[5]:
@@ -297,12 +297,12 @@ elif menu == "📈 EDA":
         st.pyplot(fig)
 
     # =====================================================
-    # ITEM 7
+    # Numerico y Churn
     # =====================================================
 
     with tabs[6]:
 
-        st.header("Análisis Numérico vs Churn")
+        st.header("Analisis Numerico vs Churn")
 
         variable = st.selectbox(
             "Variable Numérica",
@@ -321,12 +321,12 @@ elif menu == "📈 EDA":
         st.pyplot(fig)
 
     # =====================================================
-    # ITEM 8
+    # Categorico vs Churn
     # =====================================================
 
     with tabs[7]:
 
-        st.header("Análisis Categórico vs Churn")
+        st.header("Análisis Categorico vs Churn")
 
         cat_cols = analyzer.get_categorical_columns()
 
@@ -353,12 +353,12 @@ elif menu == "📈 EDA":
         st.pyplot(fig)
 
     # =====================================================
-    # ITEM 9
+    # Dinamico
     # =====================================================
 
     with tabs[8]:
 
-        st.header("Análisis Dinámico")
+        st.header("Analisis Dinamico")
 
         columnas = st.multiselect(
             "Seleccione Columnas",
@@ -386,7 +386,7 @@ elif menu == "📈 EDA":
             st.dataframe(df.describe())
 
     # =====================================================
-    # ITEM 10
+    # Hallazgos
     # =====================================================
 
     with tabs[9]:
@@ -417,12 +417,12 @@ elif menu == "📈 EDA":
             )
 
 # =====================================================
-# CONCLUSIONES
+# mis conclusiones
 # =====================================================
 
-elif menu == "📋 Conclusiones":
+elif menu == "Conclusiones":
 
-    st.title("📋 Conclusiones Finales")
+    st.title("Conclusiones Finales")
 
     st.markdown("""
     ### Conclusiones del análisis
