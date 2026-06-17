@@ -80,9 +80,9 @@ if menu == "1 Home":
 
     with col1:
         st.info("""
-        **Autor:** TU NOMBRE COMPLETO
+        **Autor:** SAMUEL LADERA QUINTO
 
-        **Curso:** Especialización Python para Data Analytics
+        **Curso:** Especialización Python Potenciado con IA
 
         **Año:** 2026
         """)
