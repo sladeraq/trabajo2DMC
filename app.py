@@ -56,7 +56,7 @@ menu = st.sidebar.radio(
 
 if menu == "1 Home":
 
-    st.title("Análisis Exploratorio de Datos - Telco Customer Churn")
+    st.title("Analisis Exploratorio de Datos - Telco Customer Churn")
     st.markdown("Elaborado: Samuel Ladera Q.") 
     st.markdown("""
     ## Objetivo
