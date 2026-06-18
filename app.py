@@ -127,6 +127,11 @@ elif menu == "2 Carga Dataset":
         # Convertir espacios vacíos en NaN
         df.replace(r'^\s*$', np.nan, regex=True, inplace=True)
 
+        # Convertir TotalCharges
+        df["TotalCharges"] = pd.to_numeric(
+            df["TotalCharges"],
+            errors="coerce"
+        )
         st.success("Archivo cargado correctamente.")
 
         st.subheader("Vista previa")
