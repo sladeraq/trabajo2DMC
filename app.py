@@ -228,25 +228,17 @@ elif menu == "3 Analisis EDA":
     # =====================================================
 
     with tabs[3]:
-        nulls = df.isnull().sum()
-        
-        nulls_detectados = nulls[nulls > 0]
-        
-        if len(nulls_detectados) > 0:
-        
-            st.warning("Columnas con valores faltantes")
-        
-            st.dataframe(
-                pd.DataFrame({
-                    "Columna": nulls_detectados.index,
-                    "Valores Nulos": nulls_detectados.values
-                })
+        missing = pd.DataFrame({
+            "Columna": df.columns,
+            "Nulos": df.isnull().sum().values,
+            "% Nulos": round(
+                (df.isnull().sum().values / len(df)) * 100,
+                2
             )
+        })
         
-        else:
-        
-            st.success("No se encontraron valores faltantes.")
-        
+        st.dataframe(missing)
+                
 
     # =====================================================
     # Variables Numericas
