@@ -355,30 +355,90 @@ elif menu == "3 Analisis EDA":
 
     with tabs[5]:
 
-        st.header("Variables Categoricas")
-
-        cat_cols = analyzer.get_categorical_columns()
-
+        st.header("Análisis de Variables Categóricas")
+    
+        st.markdown("""
+        Las variables categóricas describen características o atributos
+        de los clientes mediante categorías o grupos. Su análisis permite
+        identificar patrones de distribución y segmentación dentro de la
+        base de clientes.
+        """)
+    
+        # Excluir customerID por ser un identificador
+        categorical_cols = [
+            col for col in df.select_dtypes(
+                exclude=np.number
+            ).columns
+            if col != "customerID"
+        ]
+    
         selected_cat = st.selectbox(
-            "Variable Categórica",
-            cat_cols
+            "Seleccione una variable categórica",
+            categorical_cols
         )
-
-        counts = df[selected_cat].value_counts()
-
-        st.dataframe(counts)
-
+    
+        # Conteo de categorías
+        conteos = df[selected_cat].value_counts()
+    
+        # Porcentajes
+        porcentajes = round(
+            df[selected_cat].value_counts(normalize=True) * 100,
+            2
+        )
+    
+        resumen = pd.DataFrame({
+            "Cantidad": conteos,
+            "Porcentaje (%)": porcentajes
+        })
+    
+        st.subheader("Frecuencia de categorías")
+    
+        st.dataframe(resumen)
+    
+        # Gráfico
         fig, ax = plt.subplots(figsize=(8,4))
-
+    
         sns.countplot(
             data=df,
             x=selected_cat,
+            order=conteos.index,
             ax=ax
         )
-
+    
         plt.xticks(rotation=45)
-
+    
+        ax.set_title(
+            f"Distribución de {selected_cat}"
+        )
+    
+        ax.set_ylabel("Cantidad de Clientes")
+    
         st.pyplot(fig)
+    
+        # Interpretación automática
+    
+        categoria_principal = conteos.index[0]
+        cantidad_principal = conteos.iloc[0]
+        porcentaje_principal = porcentajes.iloc[0]
+    
+        st.subheader("Interpretación")
+    
+        st.info(
+            f"La categoría más frecuente es "
+            f"'{categoria_principal}', con "
+            f"{cantidad_principal:,} registros "
+            f"({porcentaje_principal:.2f}% del total). "
+            f"Esto indica que la mayoría de los clientes "
+            f"se concentra en esta categoría."
+        )
+    
+        # Nota metodológica
+    
+        st.caption("""
+        Nota: La variable customerID fue excluida del análisis
+        por ser un identificador único de cliente y no aportar
+        información relevante para la segmentación.
+        """)
 
     # =====================================================
     # Numerico y Churn
