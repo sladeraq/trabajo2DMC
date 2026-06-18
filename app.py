@@ -564,7 +564,7 @@ elif menu == "3 Analisis EDA":
 # mis conclusiones
 # =====================================================
 
-elif menu == "Mis Conclusiones":
+elif menu == "4 Mis Conclusiones":
 
     st.title("Conclusiones Finales")
 
