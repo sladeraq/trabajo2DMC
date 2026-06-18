@@ -228,20 +228,25 @@ elif menu == "3 Analisis EDA":
     # =====================================================
 
     with tabs[3]:
-
-        st.header("Analisis de Valores Faltantes")
-
-        nulls = analyzer.null_values()
-
-        st.dataframe(nulls)
-
-        fig, ax = plt.subplots(figsize=(10,4))
-
-        nulls.plot(kind="bar", ax=ax)
-
-        plt.xticks(rotation=45)
-
-        st.pyplot(fig)
+        nulls = df.isnull().sum()
+        
+        nulls_detectados = nulls[nulls > 0]
+        
+        if len(nulls_detectados) > 0:
+        
+            st.warning("Columnas con valores faltantes")
+        
+            st.dataframe(
+                pd.DataFrame({
+                    "Columna": nulls_detectados.index,
+                    "Valores Nulos": nulls_detectados.values
+                })
+            )
+        
+        else:
+        
+            st.success("No se encontraron valores faltantes.")
+        
 
     # =====================================================
     # Variables Numericas
