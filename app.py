@@ -122,6 +122,10 @@ elif menu == "2 Carga Dataset":
     if uploaded_file is not None:
 
         df = pd.read_csv(uploaded_file)
+        #df = pd.read_csv(uploaded_file)
+        
+        # Convertir espacios vacíos en NaN
+        df.replace(r'^\s*$', np.nan, regex=True, inplace=True)
 
         st.success("Archivo cargado correctamente.")
 
