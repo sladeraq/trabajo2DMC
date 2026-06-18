@@ -246,25 +246,103 @@ elif menu == "3 Analisis EDA":
     # =====================================================
 
     with tabs[4]:
-
-        st.header("Distribucion Variables Numericas")
-
-        num_cols = analyzer.get_numeric_columns()
-
+        st.header("Distribución de Variables Numéricas")
+    
+        # Convertir TotalCharges a numérico
+        if "TotalCharges" in df.columns:
+            df["TotalCharges"] = pd.to_numeric(
+                df["TotalCharges"],
+                errors="coerce"
+            )
+    
+        # Variables numéricas reales
+        numeric_cols = [
+            "tenure",
+            "MonthlyCharges",
+            "TotalCharges",
+            "SeniorCitizen"
+        ]
+    
         selected_num = st.selectbox(
-            "Seleccione Variable",
-            num_cols
+            "Seleccione una variable",
+            numeric_cols
         )
-
+    
         fig, ax = plt.subplots(figsize=(8,4))
-
-        sns.histplot(
-            df[selected_num],
-            kde=True,
-            ax=ax
-        )
-
+    
+        # Caso especial para SeniorCitizen
+        if selected_num == "SeniorCitizen":
+    
+            counts = (
+                df[selected_num]
+                .value_counts()
+                .sort_index()
+            )
+    
+            counts.index = [
+                "No Adulto Mayor (0)",
+                "Adulto Mayor (1)"
+            ]
+    
+            counts.plot(
+                kind="bar",
+                ax=ax
+            )
+    
+            ax.set_title(
+                "Distribución de SeniorCitizen"
+            )
+    
+            ax.set_xlabel("Categoría")
+            ax.set_ylabel("Cantidad de Clientes")
+    
+        else:
+    
+            sns.histplot(
+                data=df,
+                x=selected_num,
+                kde=True,
+                bins=30,
+                ax=ax
+            )
+    
+            ax.set_title(
+                f"Distribución de {selected_num}"
+            )
+    
         st.pyplot(fig)
+    
+        # Interpretación automática
+    
+        st.subheader("Interpretación")
+    
+        if selected_num == "tenure":
+            st.info("""
+            Esta variable representa la cantidad de meses que un cliente
+            permanece en la empresa. Permite identificar clientes nuevos
+            y clientes con mayor fidelidad.
+            """)
+    
+        elif selected_num == "MonthlyCharges":
+            st.info("""
+            Muestra la distribución de los cargos mensuales pagados por
+            los clientes. Permite identificar rangos de facturación más frecuentes.
+            """)
+    
+        elif selected_num == "TotalCharges":
+            st.info("""
+            Representa el monto total facturado a cada cliente durante
+            su permanencia. Generalmente presenta una distribución
+            relacionada con la antigüedad del cliente.
+            """)
+    
+        elif selected_num == "SeniorCitizen":
+            st.info("""
+            Variable binaria que identifica si el cliente es adulto mayor.
+            Los valores posibles son:
+            - 0: No es adulto mayor
+            - 1: Es adulto mayor
+            """)
 
     # =====================================================
     # Variables Categoricas
