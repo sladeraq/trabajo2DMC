@@ -564,7 +564,7 @@ elif menu == "3 Analisis EDA":
 # mis conclusiones
 # =====================================================
 
-elif menu == "Conclusiones":
+elif menu == "Mis Conclusiones":
 
     st.title("Conclusiones Finales")
 
@@ -572,21 +572,10 @@ elif menu == "Conclusiones":
     ### Conclusiones del análisis
 
     1. Los clientes con menor tiempo de permanencia presentan mayor tendencia a abandonar la empresa.
-
     2. Los contratos mensuales muestran una mayor proporción de churn frente a contratos de largo plazo.
-
     3. Los clientes con cargos mensuales más altos presentan tasas superiores de abandono.
-
     4. Los servicios complementarios como soporte técnico y seguridad en línea parecen asociarse con una menor fuga.
-
     5. Los métodos de pago electrónicos y contratos flexibles muestran patrones diferenciados de churn que deben ser monitoreados.
 
-    ### Recomendaciones
-
-    - Implementar campañas de fidelización temprana.
-    - Incentivar contratos de largo plazo.
-    - Ofrecer paquetes con servicios de valor agregado.
-    - Analizar segmentos de alto riesgo para mejorar retención.
-    - Continuar monitoreando indicadores de churn periódicamente.
 
     """)
