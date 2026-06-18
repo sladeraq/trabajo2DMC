@@ -230,11 +230,8 @@ elif menu == "3 Analisis EDA":
     with tabs[3]:
         missing = pd.DataFrame({
             "Columna": df.columns,
-            "Nulos": df.isnull().sum().values,
-            "% Nulos": round(
-                (df.isnull().sum().values / len(df)) * 100,
-                2
-            )
+            "Nulos": df.isnull().sum().values
+           # "% Nulos": round((df.isnull().sum().values / len(df)) * 100,2)
         })
         
         st.dataframe(missing)
